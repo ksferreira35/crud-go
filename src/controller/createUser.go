@@ -7,9 +7,8 @@ import (
 	"github.com/ksferreira35/crud-go/src/config/logger"
 	"github.com/ksferreira35/crud-go/src/config/validation"
 	"github.com/ksferreira35/crud-go/src/controller/model/request"
-	"github.com/ksferreira35/crud-go/src/controller/model/response"
+	"github.com/ksferreira35/crud-go/src/model"
 	"go.uber.org/zap"
-
 )
 
 func CreateUser (c *gin.Context) {
@@ -26,14 +25,19 @@ func CreateUser (c *gin.Context) {
 		return
 	}
 	
-	response := response.UserResponse{
-		ID: "test",
-		Email: userRequest.Email,
-		Name: userRequest.Name,
-		Age: userRequest.Age,
+	domain := model.NewUserDomain(
+		userRequest.Email,
+		userRequest.Password,
+		userRequest.Name,
+		userRequest.Age,
+	)
+	if err := domain.CreateUser(); err != nil {
+		c.JSON(err.Code, err)
+		return
 	}
+
 	logger.Info("User created successfully",
 		zap.String("journey", "createUser "))	
 
-	c.JSON(http.StatusOK, response)
+	c.String(http.StatusOK, "")
 }

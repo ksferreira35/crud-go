@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 
 	"github.com/ksferreira35/crud-go/src/config/logger"
 	rest_err "github.com/ksferreira35/crud-go/src/config/res_err"
@@ -11,13 +10,16 @@ import (
 
 func (ud *userDomainService) CreateUser(
 	userDomain model.UserDomainInterface,
-) *rest_err.RestErr {
+) (model.UserDomainInterface, *rest_err.RestErr) {
 
 	logger.Info("Init createUser model", zap.String("journey", "createUser"))
 
 	userDomain.EncryptPassword()
 
-	fmt.Println(userDomain.GetEmail())
+	userDomainRepository, err := ud.userRepository.CreateUser(userDomain)
+	if err != nil {
+		return nil, err
+	}
 
-	return nil
+	return userDomainRepository, nil
 }

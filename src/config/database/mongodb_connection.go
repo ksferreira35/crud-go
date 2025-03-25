@@ -2,14 +2,16 @@ package mongodb
 
 import (
 	"context"
+	"log"
 	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
+
 var (
-	MONGODB_URL = "MONGODB_URL"
-	MONGODB_USER_DB = "MONGODB_USER_DB"
+	MONGODB_URL     = "MONGODB_URL"
+	MONGODB_USER_DB = "MONGODB_USER_DATABASE"
 )
 
 func NewMongodbConnection(
@@ -17,15 +19,19 @@ func NewMongodbConnection(
 ) (*mongo.Database, error) {
 	mongodb_uri := os.Getenv(MONGODB_URL)
 	mongodb_database := os.Getenv(MONGODB_USER_DB)
+	log.Println(mongodb_uri)
+	log.Println(mongodb_database)
 
 	client, err := mongo.Connect(
-		ctx, 
+		ctx,
 		options.Client().ApplyURI(mongodb_uri))
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
 	if err := client.Ping(ctx, nil); err != nil {
+		log.Println(err)
 		return nil, err
 	}
 

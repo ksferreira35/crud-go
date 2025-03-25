@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	mongodb "github.com/ksferreira35/crud-go/src/config/database"
+	mongodb "github.com/ksferreira35/crud-go/src/config/database/mongodb"
 	"github.com/ksferreira35/crud-go/src/config/logger"
 	"github.com/ksferreira35/crud-go/src/controller"
 	"github.com/ksferreira35/crud-go/src/controller/routes"

@@ -12,6 +12,7 @@ type UserDomainInterface interface {
 	GetAge() int8
 	GetName() string
 
+	GetID() string
 	SetID(string)
 
 
@@ -28,6 +29,10 @@ func NewUserDomain(
 		name:     name,
 		age:      age,
 	}
+}
+
+func (ud *userDomain) GetID() string {
+	return ud.id
 }
 
 func (ud *userDomain) SetID(id string) {

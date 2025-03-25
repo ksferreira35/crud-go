@@ -19,8 +19,6 @@ func NewMongodbConnection(
 ) (*mongo.Database, error) {
 	mongodb_uri := os.Getenv(MONGODB_URL)
 	mongodb_database := os.Getenv(MONGODB_USER_DB)
-	log.Println(mongodb_uri)
-	log.Println(mongodb_database)
 
 	client, err := mongo.Connect(
 		ctx,

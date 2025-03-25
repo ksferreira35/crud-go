@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	MONGODB_USER_DB = "MONGODB_USER_DB"
+	MONGODB_USERS_COLLECTION_NAME = "MONGODB_USER_COLLECTION"
 )
 
 func (ur *userRepository) CreateUser(
@@ -20,7 +20,7 @@ func (ur *userRepository) CreateUser(
 ) (model.UserDomainInterface, *rest_err.RestErr) {
 
 	logger.Info("Init createUser repository")
-	collection_name := os.Getenv(MONGODB_USER_DB)
+	collection_name := os.Getenv(MONGODB_USERS_COLLECTION_NAME)
 
 	collection := ur.databaseConnection.Collection(collection_name)
 
@@ -28,11 +28,9 @@ func (ur *userRepository) CreateUser(
 
 	result, err := collection.InsertOne(context.Background(), value)
 	if err != nil {
-		return nil, rest_err.NewInternalServerError(err.Error())	 
+		return nil, rest_err.NewInternalServerError(err.Error())
 	}
+	value.ID = result.InsertedID.(primitive.ObjectID) 
 
-	value.ID = result.InsertedID.(primitive.ObjectID)
-
-
-	return converter.ConvertEntityToDomain(*value), nil 
+	return converter.ConvertEntityToDomain(*value), nil
 }

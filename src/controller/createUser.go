@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -15,7 +14,8 @@ import (
 
 func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	logger.Info("Init CreateUser controller",
-		zap.String("journey", "createUser "))
+		zap.String("journey", "createUser "),
+	)
 	var userRequest request.UserRequest
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
@@ -36,15 +36,18 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 
 	domainResult, err := uc.service.CreateUser(domain)
 	if err != nil {
+		logger.Error(
+			"Error to trying to call CreateUser service",
+			err,
+			zap.String("journey", "createUser"))
 		c.JSON(err.Code, err)
 		return
 	}
 
-	userString := fmt.Sprintf("%s, %s, %d", domain.GetName(), domain.GetEmail(), domain.GetAge())
-
-	logger.Info("User created successfully",
-		zap.String("journey", "createUser "),
-		zap.String("user", userString))
+	logger.Info(
+		"CreateUser controller executed successfully",
+		zap.String("userId", domainResult.GetID()),
+		zap.String("journey", "createUser "))
 
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(
 		domainResult,

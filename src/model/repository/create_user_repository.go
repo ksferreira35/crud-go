@@ -12,10 +12,6 @@ import (
 	"go.uber.org/zap"
 )
 
-const (
-	MONGODB_USERS_COLLECTION_NAME = "MONGODB_USER_COLLECTION"
-)
-
 func (ur *userRepository) CreateUser(
 	userDomain model.UserDomainInterface,
 ) (model.UserDomainInterface, *rest_err.RestErr) {

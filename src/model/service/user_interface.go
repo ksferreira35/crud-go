@@ -33,5 +33,5 @@ type UserDomainService interface {
 
 	LoginUserServices(
 		userDomain model.UserDomainInterface,
-	) (model.UserDomainInterface, *rest_err.RestErr) 
+	) (model.UserDomainInterface, string, *rest_err.RestErr) 
 }

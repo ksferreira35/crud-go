@@ -1,7 +1,7 @@
 // Buscar usuário no banco de dados por email
 GET http://localhost:8080/getUserByEmail/huncoding@gmail.com
 Accept: application/json
-Authorization:
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIwLCJlbWFpbCI6Imh1bmNvZGluZ0BnbWFpbC5jb20iLCJleHAiOjE3NeqweqsdadasdasdweqweqweqweqweDM5Nzk5NjEsImlkIjoiNjdmMWIyM2RhNzk3MmM3ZTc3MGM2NjU0IiwibmdasdasdasdFtZSI6Ikh1bmNvZGluZyJ9.L_sTW8ieJA7jT35YpNQzqtfDM7DSG2GAKX6gn294r_I
 ###
 
 // Buscar usuário no banco de dados por email

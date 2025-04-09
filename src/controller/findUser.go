@@ -19,15 +19,17 @@ func (uc *userControllerInterface) FindUserById(c *gin.Context) {
 		zap.String("journey", "findUserByID"),
 	)
 
+	userId := c.Param("userId")
+
 	user, err := model.VerifyToken(c.Request.Header.Get("Authorization"))
 	if err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
 
+
 	logger.Info(fmt.Sprintf("User authenticated: %#v", user))
 	
-	userId := c.Param("userId")
 
 	if _, err := primitive.ObjectIDFromHex(userId); err != nil {
 		logger.Error("Error to trying validate userID",
@@ -64,6 +66,16 @@ func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 	logger.Info("Init findUserByEmail controller.",
 		zap.String("journey", "findUserByEmail"),
 	)
+
+	user, err := model.VerifyToken(c.Request.Header.Get("Authorization"))
+	if err != nil {
+		c.JSON(err.Code, err)
+		return
+	}
+
+	
+	logger.Info(fmt.Sprintf("User authenticated: %#v", user))
+
 
 	userEmail := c.Param("userEmail")
 

@@ -5,9 +5,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIwLCJlbWFpbCI6Imh1
 ###
 
 // Buscar usuário no banco de dados por email
-GET http://localhost:8080/getUserById/647b3fc9c5be50a5f2e48008
+GET http://localhost:8080/getUserById/67f1b23da7972c7e770c6654
 Accept: application/json
-Authorization:
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIwLCJlbWFpbCI6Imh1bmNvZGluZ0BnbWFpbC5jb20iLCJleHAiOjE3NDQzMTYwMzAsImlkIjoiNjdmMWIyM2RhNzk3MmM3ZTc3MGM2NjU0IiwibmFtZSI6Ikh1bmNvZGluZyJ9.I3Ir_O20XB2tIQpXJgs3Q3mYwRT-XFiLc7H9Fp8fkoU
 ###
 
 // Criar um usuario dentro do banco de dados

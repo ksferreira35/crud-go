@@ -18,7 +18,7 @@ func (ud *userDomainService) DeleteUser(
 		logger.Error("Error trying to call repository",
 			err,
 			zap.String("journey", "deleteUser"))
-		return nil
+		return err
 	}
 
 	logger.Info(

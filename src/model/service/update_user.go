@@ -20,7 +20,7 @@ func (ud *userDomainService) UpdateUser(
 		logger.Error("Error trying to call repository",
 			err,
 			zap.String("journey", "updateUser"))
-		return nil
+		return err
 	}
 
 	logger.Info(

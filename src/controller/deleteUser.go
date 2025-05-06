@@ -17,18 +17,19 @@ func (uc *userControllerInterface) DeleteUser (c *gin.Context) {
 
 	userId := c.Param("userId")
 	if _, err := primitive.ObjectIDFromHex(userId); err != nil {
-	errRest := rest_err.NewBadRequestError("Invalid userId, must be a hex value")
-	c.JSON(errRest.Code, errRest)
+		errRest := rest_err.NewBadRequestError("Invalid userId, must be a hex value")
+		c.JSON(errRest.Code, errRest)
+		return
 	}
 
 	err := uc.service.DeleteUser(userId)
 	if err != nil {
-	logger.Error(
-		"Error to trying to call deleteUser service",
-		err,
-		zap.String("journey", "deleteUser"))
-	c.JSON(err.Code, err)
-	return
+		logger.Error(
+			"Error to trying to call deleteUser service",
+			err,
+			zap.String("journey", "deleteUser"))
+		c.JSON(err.Code, err)
+		return
 	}
 
 	logger.Info(
